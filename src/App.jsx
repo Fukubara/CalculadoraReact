@@ -5,6 +5,7 @@ import './App.css';
 function App() {
 
   const [display, setDisplay] = useState("")
+  const [bracketPair, setBracketPair] = useState(false)
   
   const escreveNumero = (e) => {
     setDisplay(display + e.target.firstChild.data)
@@ -14,10 +15,31 @@ function App() {
     setDisplay(display + ' ' + e.target.firstChild.data + ' ')
   }
 
-  const limpar = () => setDisplay("")
+  const Power = () => {
+    setDisplay(display + ' ^ ')
+  }
+
+  const SqRoot = (e) => {
+    setDisplay(math.sqrt(display))
+  }
+
+  const limpar = () => {
+    setDisplay("")
+    setBracketPair(false)
+  }
 
   const calcular = () => {
     setDisplay(math.evaluate(display))
+  }
+
+  const bracket = () => {
+    if (bracketPair === false){
+      setBracketPair(true)
+      setDisplay(display + "(")
+    } else {
+      setBracketPair(false)
+      setDisplay(display + ")")
+    }
   }
 
   return (
@@ -25,6 +47,9 @@ function App() {
       <div className="calcDisplay">{display}</div>
       <div className="linha">
         <button className="operators" onClick={limpar}>Clear</button>
+        <button className="operators" onClick={bracket}>( )</button>
+        <button className="operators" onClick={Power}>Pow</button>
+        <button className="operators" onClick={SqRoot}>SqRoot</button>
       </div>
       <div className="linha">
       </div>
